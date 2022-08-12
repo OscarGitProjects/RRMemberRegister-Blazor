@@ -1,0 +1,106 @@
+﻿@page "/member/memberdelete/{MemberId}"
+
+<PageTitle Title="Radera" />
+
+@if (Member != null && Member.Id > 0)
+{
+    <div class="row">
+        <div class="cols-sm-12">
+            <h1>Radera medlem @Member.Namn?</h1>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        @if (ErrorValue != ErrorCode.NONE)
+        {
+            <div class="row">
+                <div class="cols-sm-12 alert alert-danger" role="alert">@ErrorCodeMessage.GetErrorCodeMessage(ErrorValue)</div>
+            </div>
+        }
+
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                Namn
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Namn
+            </dd>
+            <dt class="col-sm-3">
+                Adress
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Adress
+            </dd>
+            <dt class="col-sm-3">
+                Postnummer
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Postnummer
+            </dd>
+            <dt class="col-sm-3">
+                Postort
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Postort
+            </dd>
+            <dt class="col-sm-3">
+                Skapatdatum
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Skapatdatumasstring
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <EditForm Model="@Member" OnSubmit="@OnSubmitForm">
+            <input type="submit" value="Radera" class="btn btn-danger" />
+            <a href="@($"member/memberlist")" class="btn btn-secondary">Tillbaka</a>
+        </EditForm>
+    </div>
+}
+else
+{
+    if (Member == null)
+    {
+        <div class="row">
+            <div class="cols-sm-12">
+                <p><em>Loading...</em></p>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="cols-sm-12">
+                <a href="@($"member/memberlist")" class="btn btn-secondary">Tillbaka</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div>
+            <div class="row">
+                <div class="cols-sm-12">
+                    <h1>Radera medlem ?</h1>
+                </div>
+            </div>
+
+            <br />
+
+            @if (ErrorValue != ErrorCode.NONE)
+            {
+                <div class="row">
+                    <div class="cols-sm-12 alert alert-danger" role="alert">@ErrorCodeMessage.GetErrorCodeMessage(ErrorValue)</div>
+                </div>
+            }   
+
+            <div class="row">
+                <div class="cols-sm-12">
+                    <a href="@($"member/memberlist")" class="btn btn-secondary">Tillbaka</a>
+                </div>
+            </div>
+        </div>
+    }
+}

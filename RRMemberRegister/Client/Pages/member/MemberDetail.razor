@@ -1,0 +1,89 @@
+﻿@page "/member/memberdetail/{MemberId}"
+
+<PageTitle Title="Detaljer" />
+
+@if (Member != null && Member.Id > 0)
+{
+    <div class="row">
+        <div class="cols-sm-12">
+            <h1>Detaljer för @Member.Namn</h1>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                Namn
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Namn
+            </dd>
+            <dt class="col-sm-3">
+                Adress
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Adress
+            </dd>
+            <dt class="col-sm-3">
+                Postnummer
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Postnummer
+            </dd>
+            <dt class="col-sm-3">
+                Postort
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Postort
+            </dd>
+            <dt class="col-sm-3">
+                Skapatdatum
+            </dt>
+            <dd class="col-sm-9">
+                @Member.Skapatdatumasstring
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a href="@($"member/memberedit/{Member.Id}")" class="btn btn-primary">Ändra</a>
+        <a href="@($"member/memberlist")" class="btn btn-secondary">Tillbaka</a>
+    </div>
+}
+else
+{
+    if (Member == null)
+    {
+        <div class="row">
+            <div class="cols-sm-12">
+                <p><em>Loading...</em></p>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="cols-sm-12">
+                <a href="@($"member/memberlist")" class="btn btn-secondary">Tillbaka</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="cols-sm-12">
+                <h1>Detaljer för ?</h1>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="cols-sm-12">
+                <p>Hittade ingen information om medlemmen</p>
+                <a href="@($"member/memberlist")" class="btn btn-secondary">Tillbaka</a>
+            </div>
+        </div>
+    }
+}

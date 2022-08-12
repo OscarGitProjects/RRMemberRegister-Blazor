@@ -1,0 +1,31 @@
+﻿@using RRMemberRegister.Shared.Enums;
+
+@code
+{
+    [Parameter]
+    public ErrorCode ErrorValue { get; set; }
+
+    public string ErrorMessage { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ErrorValue == ErrorCode.CREATED)        // 1 = created
+            ErrorMessage = "Det gick inte skapa en ny medlem";
+        else if (ErrorValue == ErrorCode.UPDATED)  // 2 = updated
+            ErrorMessage = "Det gick inte uppdaterat uppgifter om en medlem";
+        else if (ErrorValue == ErrorCode.DELETED)  // 3 = deleted
+            ErrorMessage = "Det gick inte radera medlemmen";
+        else
+            ErrorValue = ErrorCode.NONE;
+
+    }
+}
+
+
+@if (ErrorValue != ErrorCode.NONE)
+{
+    <div class="row">
+        <div class="cols-sm-12 alert alert-danger" role="alert">@ErrorMessage</div>
+    </div>
+}

@@ -1,0 +1,87 @@
+﻿@page "/member/memberlist"
+@page "/member/memberlist/{MemberAction}"
+
+<PageTitle Title="Lista medlemmar" />
+
+<div class="row">
+    <div class="cols-sm-12">
+        <h1>Lista medlemmar</h1>
+    </div>
+</div>
+
+<MemberAction MemberActionValue="@MemberActionValue" />
+
+@if (Members == null)
+{
+    <div class="row">
+        <div class="cols-sm-12">
+            <p><em>Loading...</em></p>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="cols-sm-12">
+            <a href="@($"member/membercreate")">Skapa ny medlem</a>
+        </div>
+    </div>
+}
+else if (Members?.Count <= 0)
+{
+    <div class="row">
+        <div class="cols-sm-12">
+            <p><em>Hittade inga medlemmar</em></p>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="cols-sm-12">
+            <a href="@($"member/membercreate")">Skapa ny medlem</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="cols-sm-12">
+            <a href="@($"member/membercreate")">Skapa ny medlem</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cols-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Namn</th>
+                        <th>Adress</th>
+                        <th>Postort</th>
+                        <th>Postnummer</th>
+                        <th>Skapatdatum</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach (Member member in Members)
+                {
+                    <tr>
+                        <td>@member.Id</td>
+                        <td>@member.Namn</td>
+                        <td>@member.Adress</td>
+                        <td>@member.Postort</td>
+                        <td>@member.Postnummer</td>
+                        <td>@member.Skapatdatumasstring</td>
+                        <td>
+                            <a href="@($"member/memberedit/{member.Id}")">Ändra</a> |
+                            <a href="@($"member/memberdetail/{member.Id}")">Detaljer</a> |
+                            <a href="@($"member/memberdelete/{member.Id}")">Radera</a>
+                        </td>
+                    </tr>
+                }
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

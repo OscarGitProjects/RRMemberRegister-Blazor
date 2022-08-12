@@ -1,0 +1,30 @@
+﻿@using RRMemberRegister.Shared.Enums;
+
+@code {
+
+    [Parameter]
+    public MemberActionCode MemberActionValue { get; set; }
+
+    public string MemberActionMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (MemberActionValue == MemberActionCode.CREATED)       // 1 = created
+            MemberActionMessage = "Har sparat uppgifter om en ny medlem";
+        else if (MemberActionValue == MemberActionCode.UPDATED)  // 2 = updated
+            MemberActionMessage = "Har uppdaterat uppgifter om en medlem";
+        else if (MemberActionValue == MemberActionCode.DELETED)  // 3 = deleted
+            MemberActionMessage = "Har raderat uppgifter om en medlem";
+        else
+            MemberActionValue = MemberActionCode.NONE;
+
+    }
+}
+
+
+@if (MemberActionValue != MemberActionCode.NONE)
+{
+    <div class="row">
+        <div class="cols-sm-12 alert alert-success" role="alert">@MemberActionMessage</div>
+    </div>
+}

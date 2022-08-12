@@ -1,0 +1,65 @@
+﻿@page "/member/membercreate"
+
+<PageTitle Title="Skapa ny medlem" />
+
+<div class="row">
+    <div class="cols-sm-12">
+        <h1>Skapa en ny medlem</h1>
+    </div>
+</div>
+<br />
+
+<div>
+    @if (ErrorValue != ErrorCode.NONE)
+    { 
+        <div class="row">
+            <div class="cols-sm-12 alert alert-danger" role="alert">@ErrorCodeMessage.GetErrorCodeMessage(ErrorValue)</div>
+        </div>
+    }
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm Model="@Member" OnValidSubmit="@OnValidSubmitForm" OnInvalidSubmit="@OnInvalidSubmitForm">
+                <DataAnnotationsValidator />
+                <ValidationSummary></ValidationSummary>
+
+                <div class="form-group">
+                    <label for="fornamn" class="control-label"></label>
+                    <InputText id="fornamn" class="form-control" placeholder="Skriv in förnamn" @bind-Value="@Member.Fornamn"></InputText>
+                    <ValidationMessage class="validation-message" For="@(() => Member.Fornamn)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="efternamn" class="control-label"></label>
+                    <InputText id="efternamn" class="form-control" placeholder="Skriv in efternamn" @bind-Value="@Member.Efternamn"></InputText>
+                    <ValidationMessage class="validation-message" For="@(() => Member.Efternamn)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="adress" class="control-label"></label>
+                    <InputText id="adress" class="form-control" placeholder="Skriv in adress" @bind-Value="@Member.Adress"></InputText>
+                    <ValidationMessage class="validation-message" For="@(() => Member.Adress)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="postnummer" class="control-label"></label>
+                    <InputText id="postnummer" class="form-control" placeholder="Skriv in postnummer" @bind-Value="@Member.Postnummer"></InputText>
+                    <ValidationMessage class="validation-message" For="@(() => Member.Postnummer)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="postort" class="control-label"></label>
+                    <InputText id="postort" class="form-control" placeholder="Skriv in postort" @bind-Value="@Member.Postort"></InputText>
+                    <ValidationMessage class="validation-message" For="@(() => Member.Postort)" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Spara" class="btn btn-primary" />
+                    <a href="@($"member/memberlist")" class="btn btn-secondary">Tillbaka</a>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
